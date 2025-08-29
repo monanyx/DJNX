@@ -1,0 +1,73 @@
+:root{--bg:#0b0b0f;--panel:#13131a;--ink:#f1f1ff;--muted:#a6a6bf;--brand:#8b5cf6;--cyan:#22d3ee;--hot:#f59e0b}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Segoe UI,Roboto;
+  background:url("mqdefault.jpg") center/cover no-repeat fixed;
+  color:var(--ink);
+}
+.wrap{
+  min-height:100%;
+  display:grid;
+  grid-template-columns:1fr;
+  place-items:center;
+  padding:28px;
+}
+@media(max-width:900px){.wrap{padding:16px}}
+
+.card{width:100%;max-width:980px;background:linear-gradient(180deg,#111118,#0c0c13);
+  border:1px solid #222233;border-radius:18px;box-shadow:0 10px 50px rgba(0,0,0,.35);padding:18px}
+
+.deck{display:grid;grid-template-columns:1fr;gap:16px}
+.top{display:flex;align-items:center;justify-content:space-between}
+.controls{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px}
+.controls .block{background:#0f0f16;border:1px solid #23233a;border-radius:12px;padding:10px}
+label{font-size:12px;color:var(--muted)}
+input[type=range]{width:100%}
+.btn{border:1px solid #303047;background:#171722;color:var(--ink);padding:10px 12px;border-radius:12px;cursor:pointer}
+.btn.primary{background:linear-gradient(180deg,#6d28d9,#5b21b6);border-color:#4c1d95}
+.btn.ghost{background:transparent}
+
+.stage{display:grid;place-items:center;padding:12px}
+/* new wrapper for absolute positioning */
+.deckface{
+  position: relative;
+  width:min(64vw,520px);
+  aspect-ratio:1;
+}
+
+/* platter now fills the wrapper and rotates */
+.platter{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background: url(pngwing.com.png) center/cover no-repeat,
+    radial-gradient(circle at 50% 50%, #0f0f16 0 52%, #0000 0),
+    repeating-conic-gradient(from 0deg, #1c1c28 0 3deg, #0f0f16 3deg 6deg),
+    radial-gradient(circle at 50% 50%, #0a0a10 0, #08080d 60%, #050509 100%);
+  border:8px solid #0f0f16;
+  box-shadow:inset 0 0 30px #000,0 30px 80px rgba(0,0,0,.5);
+  cursor:grab; user-select:none; touch-action:none; transition:box-shadow .15s ease;
+}
+
+/* arm sits above, doesn’t rotate with platter */
+.arm{
+  position:absolute;
+  right:-40px;
+  top:50%;
+  width:160px; height:8px;
+  background:linear-gradient(90deg,#444,#aaa,#444);
+  transform-origin:0 50%;
+  transform:rotate(18deg);
+  border-radius:6px; box-shadow:0 2px 0 #0009;
+  z-index:2; /* ensure above platter */
+}
+.arm::before{
+  content:"";
+  position:absolute; right:-10px; top:-6px;
+  width:22px; height:22px; background:#111;
+  border:2px solid #333; border-radius:6px;
+}
+
+.legend{color:var(--muted);font-size:12px}
